@@ -1,3 +1,13 @@
 <img src="{{emotion.photo}}" alt="{{user.username}}">
 <p>Your current mood: {{emotion.emotion}}</p>
-<p>Your playlists</p>
+<p>Your playlists:</p>
+{{#each playlists}}
+<div>
+  <h1>{{snippet.channelTitle}}</h1>
+  {{#if snippet.description}}
+  <p>{{snippet.description}}</p>
+  {{/if}}
+  <a href="https://www.youtube.com/channel/{{snippet.channelId}}" alt='{{snippet.title}}' target="_blank">GO TO
+    YOUTUBE</a>
+</div>
+{{/each}}

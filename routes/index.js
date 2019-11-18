@@ -2,6 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Emotion = require("../models/Emotion");
 const User = require("../models/User");
+const { google } = require("googleapis");
+
+const youtube = google.youtube({
+  version: "v3",
+  auth: process.env.YOUTUBE_CLIENT_KEY
+});
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -49,7 +55,20 @@ router.get("/photo/playlist/:userId/:emotionId", (req, res, next) => {
   return User.findById(req.params.userId)
     .then(user => {
       Emotion.findById(req.params.emotionId).then(emotion => {
-        res.render("playlistDetails", { emotion: emotion, user: user });
+        youtube.search
+          .list({
+            part: "snippet",
+            q: `${emotion.emotion} music`,
+            maxResults: 25
+          })
+          .then(response => {
+            res.render("playlistDetails", {
+              emotion: emotion,
+              user: user,
+              playlists: response.data.items
+            });
+            //console.log(response.data.items);
+          });
       });
     })
     .catch(err => {
