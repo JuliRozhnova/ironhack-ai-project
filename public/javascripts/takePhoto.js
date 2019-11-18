@@ -51,6 +51,8 @@ function stopStreamedVideo(videoElem) {
   videoElem.setAttribute("aria-hidden", true);
 }
 
+let picEmotion;
+
 const onTakePhotoButtonClick = _ => {
   imageCapture
     .takePhoto()
@@ -64,7 +66,7 @@ const onTakePhotoButtonClick = _ => {
     .then(canvas => {
       generateEmotions(canvas);
     })
-    .catch(error => ChromeSamples.log(error));
+    .catch(error => console.log(error));
 };
 
 video.addEventListener("play", function() {
@@ -75,23 +77,41 @@ start.onclick = () => onGetUserMediaButtonClick();
 snap.onclick = () => onTakePhotoButtonClick();
 
 function generateEmotions(input) {
-  faceapi.nets.ssdMobilenetv1.loadFromUri("/models").then(async () => {
-    await faceapi.nets.faceRecognitionNet.loadFromUri("/models");
-    await faceapi.nets.faceExpressionNet.loadFromUri("/models");
+  faceapi.nets.ssdMobilenetv1
+    .loadFromUri("/models")
+    .then(async () => {
+      await faceapi.nets.faceRecognitionNet.loadFromUri("/models");
+      await faceapi.nets.faceExpressionNet.loadFromUri("/models");
 
-    const result = await faceapi.detectSingleFace(input).withFaceExpressions();
-    let output = document.getElementById("emotion");
+      const result = await faceapi
+        .detectSingleFace(input)
+        .withFaceExpressions();
+      let output = document.getElementById("emotion");
 
-    if (result) {
-      let maxValue = Math.max.apply(null, Object.values(result.expressions));
-      for (let item in result.expressions) {
-        if (result.expressions[item] === maxValue) {
-          output.innerText = `Emotion: ${item}`;
+      if (result) {
+        let maxValue = Math.max.apply(null, Object.values(result.expressions));
+        for (let item in result.expressions) {
+          if (result.expressions[item] === maxValue) {
+            output.innerText = `Emotion: ${item}`;
+            picEmotion = item;
+          }
         }
+      } else {
+        console.log(`No result, take another photo`);
+        output.innerText = `Image failed, please take another one :)`;
       }
-    } else {
-      console.log(`No result, take another photo`);
-      output.innerText = `Image failed, please take another one :)`;
-    }
-  });
+
+      return picEmotion;
+    })
+    .then(emotion => {
+      axios
+        .post("/photo", {
+          emotion: emotion,
+          photo: input.toDataURL("image/jpeg", 0.5)
+        })
+        .then(response => {
+          console.log(response); // response from server with all the comments data array
+        })
+        .catch(err => console.log(err));
+    });
 }
