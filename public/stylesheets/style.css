@@ -8,6 +8,7 @@ a {
 .controller {
   display: flex;
   align-items: center;
+  flex-flow: column;
   justify-content: center; }
 
 .controller > div {
@@ -16,8 +17,6 @@ a {
   line-height: 24px; }
 
 @media (max-width: 814px) {
-  .controller {
-    flex-flow: column; }
   .controller > div {
     width: 100%;
     margin-bottom: 24px; } }

@@ -16,6 +16,7 @@
   <nav>
     <a href="/">Home</a>
     {{#if user}}
+    <a href="/photo/storage/{{user._id}}">My storage</a>
     <a href="/auth/logout">Logout</a>
     {{else}}
     <a href="/auth/login">Login</a>

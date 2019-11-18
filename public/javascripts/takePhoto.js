@@ -111,6 +111,23 @@ function generateEmotions(input) {
         })
         .then(response => {
           console.log(response); // response from server with all the comments data array
+          // Create anchor element.
+          var a = document.createElement("a");
+
+          // Create the text node for anchor element.
+          var link = document.createTextNode("Go to playlist");
+
+          // Append the text node to anchor element.
+          a.appendChild(link);
+
+          // Set the title.
+          a.title = "Go to playlist";
+
+          // Set the href property.
+          a.href = `/photo/playlist/${response.data.user}/${response.data._id}`;
+
+          // Append the anchor element to the body.
+          document.querySelector(".controller").appendChild(a);
         })
         .catch(err => console.log(err));
     });
