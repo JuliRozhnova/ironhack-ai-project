@@ -1,0 +1,38 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00b7ff; }
+
+.controller {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.controller > div {
+  width: 33%;
+  text-align: center;
+  line-height: 24px; }
+
+@media (max-width: 814px) {
+  .controller {
+    flex-flow: column; }
+  .controller > div {
+    width: 100%;
+    margin-bottom: 24px; } }
+
+video,
+canvas {
+  border: 2px solid white;
+  background: #263238;
+  height: 198px;
+  width: 100%; }
+
+[aria-hidden="true"] {
+  display: none; }
+
+[aria-hidden="false"] {
+  display: block; }
+
+/*# sourceMappingURL=style.css.map */
