@@ -80,17 +80,18 @@ function generateEmotions(input) {
     await faceapi.nets.faceExpressionNet.loadFromUri("/models");
 
     const result = await faceapi.detectSingleFace(input).withFaceExpressions();
+    let output = document.getElementById("emotion");
 
     if (result) {
       let maxValue = Math.max.apply(null, Object.values(result.expressions));
       for (let item in result.expressions) {
         if (result.expressions[item] === maxValue) {
-          let emotion = document.getElementById("emotion");
-          emotion.innerText = `Emotion: ${item}`;
+          output.innerText = `Emotion: ${item}`;
         }
       }
     } else {
       console.log(`No result, take another photo`);
+      output.innerText = `Image failed, please take another one :)`;
     }
   });
 }
