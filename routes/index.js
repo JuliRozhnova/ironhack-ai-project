@@ -6,7 +6,7 @@ const { google } = require("googleapis");
 
 const youtube = google.youtube({
   version: "v3",
-  auth: process.env.YOUTUBE_CLIENT_KEY
+  auth: process.env.YOUTUBE_CLIENT_KEY2
 });
 
 /* GET home page */

@@ -1,6 +1,8 @@
 body {
+  color: white;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgba(27, 26, 26, 0.863); }
 
 a {
   color: #00b7ff; }
@@ -9,7 +11,7 @@ a {
   display: flex;
   align-items: center;
   flex-flow: column;
-  justify-content: center; }
+  justify-content: space-around; }
 
 .controller > div {
   width: 33%;
@@ -24,9 +26,10 @@ a {
 video,
 canvas {
   border: 2px solid white;
-  background: #263238;
+  background: #282828;
   height: 198px;
-  width: 100%; }
+  width: 100%;
+  padding: 300px; }
 
 [aria-hidden="true"] {
   display: none; }
@@ -38,11 +41,22 @@ canvas {
   display: flex;
   flex-wrap: wrap; }
   .container > div {
-    width: 50%; }
+    width: 50%;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem; }
+  .container-iframe iframe {
+    border-radius: 50px;
+    box-shadow: 2px 5px #282828; }
   .container div a {
     padding: 1rem 2rem;
-    background: red;
+    background: #ff0000;
     color: white;
-    text-decoration: none; }
+    text-decoration: none;
+    box-shadow: 2px 5px #282828;
+    border-radius: 50px; }
+
+.imgSelf {
+  border-radius: 50px;
+  box-shadow: 2px 5px #282828; }
 
 /*# sourceMappingURL=style.css.map */
