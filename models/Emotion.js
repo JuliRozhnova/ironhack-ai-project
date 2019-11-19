@@ -7,7 +7,8 @@ const emotionSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  playlists: [Object]
 });
 
 const Emotion = mongoose.model("Emotion", emotionSchema);

@@ -3,17 +3,17 @@
 <p>Your playlists:</p>
 
 <div class="container">
-  {{#each playlists}}
+  {{#each emotion.playlists}}
   <div>
     <div>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list={{id.playlistId}}"
-        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list={{itemId}}" frameborder="0"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
-    <h3>{{snippet.title}}</h3>
-    {{#if snippet.description}}
-    <p>{{snippet.description}}</p>
+    <h3>{{title}}</h3>
+    {{#if description}}
+    <p>{{description}}</p>
     {{/if}}
-    <a href="https://www.youtube.com/channel/{{snippet.channelId}}" alt='{{snippet.title}}' target="_blank">GO TO
+    <a href="https://www.youtube.com/channel/{{channelId}}" alt='{{title}}' target="_blank">GO TO
       CHANNEL</a>
   </div>
   {{/each}}

@@ -3,6 +3,7 @@ const router = express.Router();
 const Emotion = require("../models/Emotion");
 const User = require("../models/User");
 const { google } = require("googleapis");
+const shuffle = require("../utils/functions");
 
 const youtube = google.youtube({
   version: "v3",
@@ -51,14 +52,13 @@ router.get("/photo/storage/:userId/", (req, res, next) => {
 });
 
 router.get("/photo/playlist/:userId/:emotionId", (req, res, next) => {
-  console.log(req.params);
   return User.findById(req.params.userId)
     .then(user => {
       Emotion.findById(req.params.emotionId).then(emotion => {
         youtube.search
           .list({
             part: "snippet",
-            maxResults: 25,
+            maxResults: 10,
             order: "relevance",
             q: `${emotion.emotion} music`,
             relevanceLanguage: "en",
@@ -66,37 +66,25 @@ router.get("/photo/playlist/:userId/:emotionId", (req, res, next) => {
             safeSearch: "moderate"
           })
           .then(response => {
-            //res.send(response.data.items);
-            let arr = response.data.items;
-            let resultItems = [];
+            let result = response.data.items;
+            let resultPlaylist = [];
+            resultPlaylist = shuffle(result);
 
-            const shuffle = array => {
-              // Fisher-Yates Shuffle algorithm
-              let currentIndex = array.length,
-                temporaryValue,
-                randomIndex;
-              // While there remain elements to shuffle
-              while (currentIndex) {
-                // Pick a remaing element...
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
-
-                // And swap it with the current element
-                temporaryValue = array[currentIndex];
-                array[currentIndex] = array[randomIndex];
-                array[randomIndex] = temporaryValue;
-              }
-
-              return array.slice(0, 6);
-            };
-            resultItems = shuffle(arr);
-
-            res.render("playlistDetails", {
-              emotion: emotion,
-              user: user,
-              playlists: resultItems
-            });
-            // console.log(response.data.items);
+            Emotion.findByIdAndUpdate(
+              req.params.emotionId,
+              {
+                playlists: resultPlaylist
+              },
+              { new: true }
+            )
+              .then(emotion => {
+                console.log(emotion);
+                res.render("playlistDetails", {
+                  emotion: emotion,
+                  user: user
+                });
+              })
+              .catch(err => console.log(`Error: ${err.message}`));
           });
       });
     })
