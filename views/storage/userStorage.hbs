@@ -1,9 +1,5 @@
 {{#if emotions}}
 <h1>Emotions {{#if user}}from {{user.username}}{{/if}}</h1>
-{{else}}
-<p>No emotions to display!</p>
-{{/if}}
-
 {{#each emotions}}
 <div>
   <img src="{{photo}}" alt="{{emotion}}" />
@@ -19,6 +15,9 @@
   {{/if}}
 </div>
 {{/each}}
+{{else}}
+<p>No emotions to display!</p>
+{{/if}}
 
 <a href="/storage">Go back to storage</a>
 
