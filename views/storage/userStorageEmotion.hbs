@@ -1,4 +1,7 @@
 <h1>Emotion {{emotion.emotion}} from {{user.username}}</h1>
+{{#if showDelete}}
+<a href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
+{{/if}}
 <div class="container">
   {{#each emotion.playlists}}
   <div>
@@ -15,3 +18,4 @@
   </div>
   {{/each}}
 </div>
+<a href="/storage/{{user._id}}">Go back</a>
