@@ -58,8 +58,12 @@ router.get("/photo/playlist/:userId/:emotionId", (req, res, next) => {
         youtube.search
           .list({
             part: "snippet",
+            maxResults: 25,
+            order: "relevance",
             q: `${emotion.emotion} music`,
-            maxResults: 25
+            relevanceLanguage: "en",
+            type: "playlist",
+            safeSearch: "moderate"
           })
           .then(response => {
             res.render("playlistDetails", {
