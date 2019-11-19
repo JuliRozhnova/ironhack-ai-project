@@ -1,13 +1,20 @@
 <img src="{{emotion.photo}}" alt="{{user.username}}">
 <p>Your current mood: {{emotion.emotion}}</p>
 <p>Your playlists:</p>
-{{#each playlists}}
-<div>
-  <h1>{{snippet.channelTitle}}</h1>
-  {{#if snippet.description}}
-  <p>{{snippet.description}}</p>
-  {{/if}}
-  <a href="https://www.youtube.com/channel/{{snippet.channelId}}" alt='{{snippet.title}}' target="_blank">GO TO
-    YOUTUBE</a>
+
+<div class="container">
+  {{#each playlists}}
+  <div>
+    <div>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list={{id.playlistId}}"
+        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <h3>{{snippet.title}}</h3>
+    {{#if snippet.description}}
+    <p>{{snippet.description}}</p>
+    {{/if}}
+    <a href="https://www.youtube.com/channel/{{snippet.channelId}}" alt='{{snippet.title}}' target="_blank">GO TO
+      CHANNEL</a>
+  </div>
+  {{/each}}
 </div>
-{{/each}}

@@ -42,3 +42,19 @@ canvas {
 [aria-hidden="false"] {
   display: block;
 }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+
+  & > div {
+    width: 50%;
+  }
+
+  div a {
+    padding: 1rem 2rem;
+    background: red;
+    color: white;
+    text-decoration: none;
+  }
+}

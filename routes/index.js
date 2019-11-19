@@ -66,12 +66,37 @@ router.get("/photo/playlist/:userId/:emotionId", (req, res, next) => {
             safeSearch: "moderate"
           })
           .then(response => {
+            //res.send(response.data.items);
+            let arr = response.data.items;
+            let resultItems = [];
+
+            const shuffle = array => {
+              // Fisher-Yates Shuffle algorithm
+              let currentIndex = array.length,
+                temporaryValue,
+                randomIndex;
+              // While there remain elements to shuffle
+              while (currentIndex) {
+                // Pick a remaing element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+              }
+
+              return array.slice(0, 6);
+            };
+            resultItems = shuffle(arr);
+
             res.render("playlistDetails", {
               emotion: emotion,
               user: user,
-              playlists: response.data.items
+              playlists: resultItems
             });
-            //console.log(response.data.items);
+            // console.log(response.data.items);
           });
       });
     })

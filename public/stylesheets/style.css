@@ -34,4 +34,15 @@ canvas {
 [aria-hidden="false"] {
   display: block; }
 
+.container {
+  display: flex;
+  flex-wrap: wrap; }
+  .container > div {
+    width: 50%; }
+  .container div a {
+    padding: 1rem 2rem;
+    background: red;
+    color: white;
+    text-decoration: none; }
+
 /*# sourceMappingURL=style.css.map */
