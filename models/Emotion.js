@@ -8,7 +8,12 @@ const emotionSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
-  playlists: [Object]
+  playlists: [Object],
+  favourite: {
+    type: Boolean,
+    enum: [false, true],
+    default: false
+  }
 });
 
 const Emotion = mongoose.model("Emotion", emotionSchema);

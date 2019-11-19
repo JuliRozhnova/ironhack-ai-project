@@ -83,4 +83,10 @@ app.use("/", index);
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
+const photoRoutes = require("./routes/photo");
+app.use("/photo", photoRoutes);
+
+const storageRoutes = require("./routes/storage");
+app.use("/storage", storageRoutes);
+
 module.exports = app;

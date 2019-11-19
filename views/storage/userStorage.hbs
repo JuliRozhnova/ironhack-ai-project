@@ -10,6 +10,11 @@
   <p>{{emotion}}</p>
   <a href="/storage/{{user._id}}/{{_id}}">Details</a>
   {{#if ../ownerRights}}
+  {{#if favourite}}
+  <a href="/storage/{{user._id}}/{{_id}}/notfav">Remove from favourite</a>
+  {{else}}
+  <a href="/storage/{{user._id}}/{{_id}}/fav">Make favourite</a>
+  {{/if}}
   <a href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
   {{/if}}
 </div>
