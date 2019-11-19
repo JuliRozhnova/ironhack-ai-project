@@ -7,7 +7,7 @@ const shuffle = require("../utils/functions");
 
 const youtube = google.youtube({
   version: "v3",
-  auth: process.env.YOUTUBE_CLIENT_KEY
+  auth: process.env.YOUTUBE_CLIENT_KEY2
 });
 
 /* GET home page */
@@ -19,8 +19,7 @@ const loginCheck = _ => (req, res, next) =>
   req.user ? next() : res.redirect("/");
 
 router.get("/photo", loginCheck(), (req, res, next) => {
-  console.log("Body: ", req.route);
-  res.render("photo", { user: req.user });
+  res.render("photo", { user: req.user, path: req.route.path });
 });
 
 router.post("/photo", loginCheck(), (req, res, next) => {
