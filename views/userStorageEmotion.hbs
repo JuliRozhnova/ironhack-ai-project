@@ -1,12 +1,9 @@
-<img class="imgSelf" src="{{emotion.photo}}" alt="{{user.username}}">
-<p>Your current mood: {{emotion.emotion}}</p>
-<p>Your playlists:</p>
-
+<h1>Emotion {{emotion.emotion}} from {{user.username}}</h1>
 <div class="container">
   {{#each emotion.playlists}}
   <div>
-    <div class="container-iframe">
-      <iframe width="360" height="215" src="https://www.youtube.com/embed/videoseries?list={{itemId}}" frameborder="0"
+    <div>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list={{itemId}}" frameborder="0"
         allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <h3>{{title}}</h3>

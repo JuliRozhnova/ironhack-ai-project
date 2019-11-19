@@ -2,6 +2,8 @@ const video = document.getElementById("video");
 const canvas = document.getElementById("takePhotoCanvas");
 const start = document.getElementById("getUserMediaButton");
 const snap = document.getElementById("takePhotoButton");
+const retake = document.getElementById("retakePhotoButton");
+const generate = document.getElementById("generateButton");
 let imageCapture;
 
 /* Utils */
@@ -39,7 +41,7 @@ const onGetUserMediaButtonClick = _ => {
     .catch(error => ChromeSamples.log(error));
 };
 
-function stopStreamedVideo(videoElem) {
+const stopStreamedVideo = videoElem => {
   let stream = videoElem.srcObject;
   let tracks = stream.getTracks();
 
@@ -48,8 +50,8 @@ function stopStreamedVideo(videoElem) {
   });
 
   videoElem.srcObject = null;
-  videoElem.setAttribute("aria-hidden", true);
-}
+  videoElem.parentElement.setAttribute("aria-hidden", true);
+};
 
 let picEmotion;
 
@@ -75,6 +77,7 @@ video.addEventListener("play", function() {
 
 start.onclick = () => onGetUserMediaButtonClick();
 snap.onclick = () => onTakePhotoButtonClick();
+retake.onclick = () => (window.location = "/photo");
 
 function generateEmotions(input) {
   faceapi.nets.ssdMobilenetv1
@@ -88,6 +91,8 @@ function generateEmotions(input) {
         .withFaceExpressions();
       let output = document.getElementById("emotion");
 
+      retake.setAttribute("aria-hidden", false);
+
       if (result) {
         let maxValue = Math.max.apply(null, Object.values(result.expressions));
         for (let item in result.expressions) {
@@ -98,25 +103,30 @@ function generateEmotions(input) {
           }
         }
       } else {
-        console.log(`No result, take another photo`);
         output.innerText = `Image failed, please take another one :)`;
       }
     })
     .then(emotion => {
-      axios
-        .post("/photo", {
-          emotion: emotion,
-          photo: input.toDataURL("image/jpeg", 0.5)
-        })
-        .then(response => {
-          console.log(response); // response from server with all the comments data array
-          var a = document.createElement("a");
-          var link = document.createTextNode("Go to playlist");
-          a.appendChild(link);
-          a.title = "Go to playlist";
-          a.href = `/photo/playlist/${response.data.user}/${response.data._id}`;
-          document.querySelector(".controller").appendChild(a);
-        })
-        .catch(err => console.log(err));
+      if (emotion) {
+        generate.setAttribute("aria-hidden", false);
+        generate.onclick = () => {
+          axios
+            .post("/photo", {
+              emotion: emotion,
+              photo: input.toDataURL("image/jpeg", 0.5)
+            })
+            .then(response => {
+              generate.setAttribute("aria-hidden", true);
+              retake.setAttribute("aria-hidden", true);
+              var a = document.createElement("a");
+              var link = document.createTextNode("Go to playlist");
+              a.appendChild(link);
+              a.title = "Go to playlist";
+              a.href = `/photo/playlist/${response.data.user}/${response.data._id}`;
+              document.querySelector(".controller").appendChild(a);
+            })
+            .catch(err => console.log(err));
+        };
+      }
     });
 }

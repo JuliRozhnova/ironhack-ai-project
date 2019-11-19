@@ -6,7 +6,8 @@
 
 {{#each emotions}}
 <div>
-  <img src="{{photo}}" alt="{{username}}">
+  <img src="{{photo}}" alt="{{emotion}}" />
   <p>{{emotion}}</p>
+  <a href="/photo/storage/{{user._id}}/{{_id}}">Details</a>
 </div>
 {{/each}}
