@@ -19,6 +19,7 @@ const loginCheck = _ => (req, res, next) =>
   req.user ? next() : res.redirect("/");
 
 router.get("/photo", loginCheck(), (req, res, next) => {
+  console.log("Body: ", req.route);
   res.render("photo", { user: req.user });
 });
 
