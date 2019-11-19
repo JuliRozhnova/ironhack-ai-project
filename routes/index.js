@@ -43,7 +43,19 @@ router.get("/photo/storage/:userId/", (req, res, next) => {
   return User.findById(req.params.userId)
     .then(user => {
       Emotion.find({ user: req.params.userId }).then(emotions => {
-        res.render("userStorage", { emotions: emotions, user: user });
+        res.render("userStorage", { emotions, user });
+      });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+router.get("/photo/storage/:userId/:emotionId", (req, res, next) => {
+  return User.findById(req.params.userId)
+    .then(user => {
+      Emotion.findById(req.params.emotionId).then(emotion => {
+        res.render("userStorageEmotion", { emotion, user });
       });
     })
     .catch(err => {

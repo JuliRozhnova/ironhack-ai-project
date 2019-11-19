@@ -1,0 +1,17 @@
+<h1>Emotion {{emotion.emotion}} from {{user.username}}</h1>
+<div class="container">
+  {{#each emotion.playlists}}
+  <div>
+    <div>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list={{itemId}}" frameborder="0"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <h3>{{title}}</h3>
+    {{#if description}}
+    <p>{{description}}</p>
+    {{/if}}
+    <a href="https://www.youtube.com/channel/{{channelId}}" alt='{{title}}' target="_blank">GO TO
+      CHANNEL</a>
+  </div>
+  {{/each}}
+</div>
