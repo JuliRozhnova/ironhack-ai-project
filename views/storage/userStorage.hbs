@@ -9,7 +9,7 @@
   <img src="{{photo}}" alt="{{emotion}}" />
   <p>{{emotion}}</p>
   <a href="/storage/{{user._id}}/{{_id}}">Details</a>
-  {{#if ../showDelete}}
+  {{#if ../ownerRights}}
   <a href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
   {{/if}}
 </div>

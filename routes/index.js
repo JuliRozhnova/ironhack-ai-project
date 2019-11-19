@@ -101,8 +101,9 @@ router.get("/storage/:userId/", (req, res, next) => {
           res.render("storage/userStorage", {
             emotions: emotions,
             user: user,
-            showDelete:
-              emotions[0].user._id.toString() == req.user._id.toString(),
+            ownerRights:
+              emotions[0].user._id.toString() == req.user._id.toString() ||
+              req.user.role === "admin",
             owner: req.user._id
           });
         });
@@ -127,7 +128,9 @@ router.get("/storage/:userId/:emotionId", (req, res, next) => {
         res.render("storage/userStorageEmotion", {
           emotion: emotion,
           user: user,
-          showDelete: emotion.user._id.toString() == req.user._id.toString(),
+          ownerRights:
+            emotion.user._id.toString() == req.user._id.toString() ||
+            req.user.role === "admin",
           owner: req.user._id
         });
       });
