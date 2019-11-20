@@ -1,20 +1,29 @@
 {{#if emotions}}
 <h1>Emotions {{#if user}}from {{user.username}}{{/if}}</h1>
-{{#each emotions}}
-<div>
-  <img src="{{photo}}" alt="{{emotion}}" />
-  <p>{{emotion}}</p>
-  <a href="/storage/{{user._id}}/{{_id}}">Details</a>
-  {{#if ../ownerRights}}
-  {{#if favourite}}
-  <a href="/storage/{{user._id}}/{{_id}}/notfav">Remove from favourite</a>
-  {{else}}
-  <a href="/storage/{{user._id}}/{{_id}}/fav">Make favourite</a>
-  {{/if}}
-  <a href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
-  {{/if}}
+<form>
+  <label for="filterEmotions">Choose:</label>
+  <select name="filterEmotions" id="filterEmotions">
+    <option value="all">Show all</option>
+    <option value="fav">Show favourite</option>
+  </select>
+</form>
+<div id="container-item">
+  {{#each emotions}}
+  <div>
+    <img src="{{photo}}" alt="{{emotion}}" />
+    <p>{{emotion}}</p>
+    <a href="/storage/{{user._id}}/{{_id}}">Details</a>
+    {{#if ../ownerRights}}
+    {{#if favourite}}
+    <a href="/storage/{{user._id}}/{{_id}}/notfav">Remove from favourite</a>
+    {{else}}
+    <a href="/storage/{{user._id}}/{{_id}}/fav">Make favourite</a>
+    {{/if}}
+    <a href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
+    {{/if}}
+  </div>
+  {{/each}}
 </div>
-{{/each}}
 {{else}}
 <p>No emotions to display!</p>
 {{/if}}
@@ -28,5 +37,39 @@
     storage.setAttribute(
       "aria-hidden", true
     );
+  }
+
+  // select on change
+  document.getElementById("filterEmotions").onchange = evt => {
+    evt.preventDefault();
+
+    axios.post("/storage/{{user._id}}", {
+      value: evt.target.value
+    }).then(res => {
+      let itemBox = ""
+
+      if (res.data.length) {
+        res.data.forEach(item => {
+          let favButton = ""
+          if (JSON.parse(res.config.data).value.toString() === "fav" || item.favourite) {
+            favButton = `<a href="/storage/${item.user._id}/${item._id}/notfav">Remove from favourite</a>`
+          }
+          else {
+            favButton = `<a href="/storage/${item.user._id}/${item._id}/fav">Make favourite</a>`
+          }
+          itemBox += `<div>
+    <img src="${item.photo}" alt="${item.emotion}" />
+    <p>${item.emotion}</p>
+    <a href="/storage/${item.user._id}/${item._id}">Details</a>
+    ${favButton}
+    <a href="/storage/${item.user._id}/${item._id}/delete">Delete</a>
+  </div > `
+        })
+      } else {
+        itemBox += `You don't have favourites`
+      }
+
+      document.getElementById("container-item").innerHTML = itemBox;
+    }).catch(err => console.log(`Error: ${err.message}`))
   }
 </script>
