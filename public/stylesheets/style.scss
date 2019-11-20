@@ -48,7 +48,8 @@ canvas {
 
 .container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
 
   & > div {
     width: 50%;
@@ -61,6 +62,8 @@ canvas {
       // box-shadow: 7px 7px white;
       border-radius: 50px;
       box-shadow: 2px 5px #282828;
+      justify-content: space-between;
+      align-content: space-between;
     }
   }
 
@@ -74,7 +77,36 @@ canvas {
   }
 }
 
+.test {
+  display: flex;
+  justify-content: center;
+}
+
 .imgSelf {
   border-radius: 50px;
   box-shadow: 2px 5px #282828;
+}
+
+img {
+  border-radius: 50px;
+  box-shadow: 2px 5px #282828;
+}
+
+.nav {
+  & > a {
+    flex-direction: row;
+    padding: 0.5rem 1rem;
+    background: #ff0000;
+    color: white;
+    text-decoration: none;
+    box-shadow: 2px 5px #282828;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    // align-content: center;
+    width: 10%;
+  }
+}
+h1{
+  text-align: center;
 }
