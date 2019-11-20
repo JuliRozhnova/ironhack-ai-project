@@ -7,6 +7,12 @@ const emotionSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"
+  },
+  playlists: [Object],
+  favourite: {
+    type: Boolean,
+    enum: [false, true],
+    default: false
   }
 });
 

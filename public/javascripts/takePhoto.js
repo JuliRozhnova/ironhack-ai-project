@@ -2,6 +2,8 @@ const video = document.getElementById("video");
 const canvas = document.getElementById("takePhotoCanvas");
 const start = document.getElementById("getUserMediaButton");
 const snap = document.getElementById("takePhotoButton");
+const retake = document.getElementById("retakePhotoButton");
+const generate = document.getElementById("generateButton");
 let imageCapture;
 
 /* Utils */
@@ -39,7 +41,7 @@ const onGetUserMediaButtonClick = _ => {
     .catch(error => ChromeSamples.log(error));
 };
 
-function stopStreamedVideo(videoElem) {
+const stopStreamedVideo = videoElem => {
   let stream = videoElem.srcObject;
   let tracks = stream.getTracks();
 
@@ -48,8 +50,10 @@ function stopStreamedVideo(videoElem) {
   });
 
   videoElem.srcObject = null;
-  videoElem.setAttribute("aria-hidden", true);
-}
+  videoElem.parentElement.setAttribute("aria-hidden", true);
+};
+
+let picEmotion;
 
 const onTakePhotoButtonClick = _ => {
   imageCapture
@@ -64,7 +68,7 @@ const onTakePhotoButtonClick = _ => {
     .then(canvas => {
       generateEmotions(canvas);
     })
-    .catch(error => ChromeSamples.log(error));
+    .catch(error => console.log(error));
 };
 
 video.addEventListener("play", function() {
@@ -73,24 +77,56 @@ video.addEventListener("play", function() {
 
 start.onclick = () => onGetUserMediaButtonClick();
 snap.onclick = () => onTakePhotoButtonClick();
+retake.onclick = () => (window.location = "/photo");
 
 function generateEmotions(input) {
-  faceapi.nets.ssdMobilenetv1.loadFromUri("/models").then(async () => {
-    await faceapi.nets.faceRecognitionNet.loadFromUri("/models");
-    await faceapi.nets.faceExpressionNet.loadFromUri("/models");
+  faceapi.nets.ssdMobilenetv1
+    .loadFromUri("/models")
+    .then(async () => {
+      await faceapi.nets.faceRecognitionNet.loadFromUri("/models");
+      await faceapi.nets.faceExpressionNet.loadFromUri("/models");
 
-    const result = await faceapi.detectSingleFace(input).withFaceExpressions();
+      const result = await faceapi
+        .detectSingleFace(input)
+        .withFaceExpressions();
+      let output = document.getElementById("emotion");
 
-    if (result) {
-      let maxValue = Math.max.apply(null, Object.values(result.expressions));
-      for (let item in result.expressions) {
-        if (result.expressions[item] === maxValue) {
-          let emotion = document.getElementById("emotion");
-          emotion.innerText = `Emotion: ${item}`;
+      retake.setAttribute("aria-hidden", false);
+
+      if (result) {
+        let maxValue = Math.max.apply(null, Object.values(result.expressions));
+        for (let item in result.expressions) {
+          if (result.expressions[item] === maxValue) {
+            output.innerText = `Emotion: ${item}`;
+            picEmotion = item;
+            return picEmotion;
+          }
         }
+      } else {
+        output.innerText = `Image failed, please take another one :)`;
       }
-    } else {
-      console.log(`No result, take another photo`);
-    }
-  });
+    })
+    .then(emotion => {
+      if (emotion) {
+        generate.setAttribute("aria-hidden", false);
+        generate.onclick = () => {
+          axios
+            .post("/photo", {
+              emotion: emotion,
+              photo: input.toDataURL("image/jpeg", 0.5)
+            })
+            .then(response => {
+              generate.setAttribute("aria-hidden", true);
+              retake.setAttribute("aria-hidden", true);
+              var a = document.createElement("a");
+              var link = document.createTextNode("Go to playlist");
+              a.appendChild(link);
+              a.title = "Go to playlist";
+              a.href = `/photo/playlist/${response.data.user}/${response.data._id}`;
+              document.querySelector(".controller").appendChild(a);
+            })
+            .catch(err => console.log(err));
+        };
+      }
+    });
 }

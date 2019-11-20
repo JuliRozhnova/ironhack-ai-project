@@ -13,8 +13,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
 
-mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost/ironhack-ai-proj", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/ironhack-ai-proj", {
     useNewUrlParser: true
   })
   .then(x => {
@@ -84,5 +83,11 @@ app.use("/", index);
 
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
+
+const photoRoutes = require("./routes/photo");
+app.use("/photo", photoRoutes);
+
+const storageRoutes = require("./routes/storage");
+app.use("/storage", storageRoutes);
 
 module.exports = app;

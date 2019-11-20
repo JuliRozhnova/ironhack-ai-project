@@ -1,0 +1,15 @@
+<div class="controller">
+  <div class="controller-web" aria-hidden="false">
+    <video id="video" autoplay></video>
+    <button id='getUserMediaButton'>Start stream</button>
+    <button id='takePhotoButton' disabled>Take Photo</button>
+  </div>
+  <div>
+    <canvas id='takePhotoCanvas' aria-hidden="true"></canvas>
+    <p id="emotion"></p>
+    <button id="retakePhotoButton" aria-hidden="true">Retake</button>
+    <button id="generateButton" aria-hidden="true">Generate</button>
+  </div>
+</div>
+
+<script src="/javascripts/takePhoto.js"></script>
