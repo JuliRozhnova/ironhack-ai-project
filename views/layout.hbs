@@ -19,7 +19,9 @@
     <a href="/storage">Storage</a>
     {{#if owner}}
     <a href="/photo">Take photo</a>
+    {{#if emotions}}
     <a href="/storage/{{owner._id}}">My storage</a>
+    {{/if}}
     <a href="/auth/logout">Logout</a>
     {{else}}  
     <a href="/auth/login">Login</a>

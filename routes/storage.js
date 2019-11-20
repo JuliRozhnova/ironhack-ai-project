@@ -7,6 +7,21 @@ const User = require("../models/User");
 const loginCheck = _ => (req, res, next) =>
   req.user ? next() : res.redirect("/");
 
+router.get("/", (req, res, next) => {
+  Emotion.find({})
+    .populate("user")
+    .then(emotions => {
+      const users = emotions.map(item => item.user);
+      const unique = [...new Set(users)];
+      res.render("storage/storage", {
+        users: unique,
+        owner: req.user._id,
+        emotions: emotions
+      });
+    })
+    .catch(err => next(err));
+});
+
 router.post("/:userId", (req, res, next) => {
   Emotion.find({
     user: req.params.userId
@@ -19,7 +34,7 @@ router.post("/:userId", (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.get("/:userId/", (req, res, next) => {
+router.get("/:userId", (req, res, next) => {
   return User.findById(req.params.userId)
     .then(user => {
       Emotion.find({
@@ -42,20 +57,13 @@ router.get("/:userId/", (req, res, next) => {
     });
 });
 
-router.get("/", (req, res, next) => {
-  User.find({})
-    .then(docs => {
-      res.render("storage/storage", { users: docs, owner: req.user._id });
-    })
-    .catch(err => next(err));
-});
-
 router.get("/:userId/:emotionId", (req, res, next) => {
   return User.findById(req.params.userId)
     .then(user => {
       Emotion.findById(req.params.emotionId).then(emotion => {
         res.render("storage/userStorageEmotion", {
           emotion: emotion,
+          emotions: [emotion],
           user: user,
           ownerRights:
             emotion.user._id.toString() == req.user._id.toString() ||

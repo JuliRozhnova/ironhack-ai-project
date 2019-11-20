@@ -1,5 +1,6 @@
 {{#if emotions}}
 <h1>Emotions {{#if user}}from {{user.username}}{{/if}}</h1>
+{{#if ../ownerRights}}
 <form>
   <label for="filterEmotions">Choose:</label>
   <select name="filterEmotions" id="filterEmotions">
@@ -7,10 +8,13 @@
     <option value="fav">Show favourite</option>
   </select>
 </form>
+{{/if}}
 <div class="carousel" id="container-item">
   {{#each emotions}}
   <div class="carousel-item">
+    {{#if ../ownerRights}}
     <img src="{{photo}}" alt="{{emotion}}">
+    {{/if}}
     <p>{{emotion}}</p>
     <a href="/storage/{{user._id}}/{{_id}}">Details</a>
     {{#if ../ownerRights}}
