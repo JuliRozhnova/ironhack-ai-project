@@ -16,17 +16,11 @@ const loginCheck = _ => (req, res, next) =>
   req.user ? next() : res.redirect("/");
 
 router.get("/", loginCheck(), (req, res, next) => {
-  const user = req.user._id;
-  Emotion.find({ user })
-    .then(emotions => {
-      res.render("photo/photo", {
-        user: req.user,
-        path: req.route.path,
-        owner: user,
-        emotions: emotions
-      });
-    })
-    .catch(err => next(err));
+  res.render("photo/photo", {
+    user: req.user,
+    path: req.route.path,
+    owner: req.user._id
+  });
 });
 
 router.post("/", loginCheck(), (req, res, next) => {

@@ -7,19 +7,12 @@ const User = require("../models/User");
 const loginCheck = _ => (req, res, next) =>
   req.user ? next() : res.redirect("/");
 
-router.get("/", (req, res, next) => {
-  Emotion.find({})
-    .populate("user")
-    .then(emotions => {
-      const users = emotions.map(item => item.user);
-      const unique = [...new Set(users)];
-      res.render("storage/storage", {
-        users: unique,
-        owner: req.user._id,
-        emotions: emotions
-      });
+router.get("/", (req, res) => {
+  User.find({})
+    .then(users => {
+      res.render("storage/storage", { users: users, owner: req.user._id });
     })
-    .catch(err => next(err));
+    .catch(err => console.log(err));
 });
 
 router.post("/:userId", (req, res, next) => {
@@ -46,7 +39,7 @@ router.get("/:userId", (req, res, next) => {
             emotions: emotions,
             user: user,
             ownerRights:
-              emotions[0].user._id.toString() == req.user._id.toString() ||
+              user._id.toString() == req.user._id.toString() ||
               req.user.role === "admin",
             owner: req.user._id
           });
@@ -63,10 +56,9 @@ router.get("/:userId/:emotionId", (req, res, next) => {
       Emotion.findById(req.params.emotionId).then(emotion => {
         res.render("storage/userStorageEmotion", {
           emotion: emotion,
-          emotions: [emotion],
           user: user,
           ownerRights:
-            emotion.user._id.toString() == req.user._id.toString() ||
+            user._id.toString() == req.user._id.toString() ||
             req.user.role === "admin",
           owner: req.user._id
         });
