@@ -7,11 +7,23 @@ const User = require("../models/User");
 const loginCheck = _ => (req, res, next) =>
   req.user ? next() : res.redirect("/");
 
+router.post("/:userId", (req, res, next) => {
+  Emotion.find({
+    user: req.params.userId
+  })
+    .populate("user")
+    .then(emotions => {
+      let fav = emotions.filter(item => item.favourite && item);
+      req.body.value.toString() === "fav" ? res.json(fav) : res.json(emotions);
+    })
+    .catch(err => next(err));
+});
+
 router.get("/:userId/", (req, res, next) => {
   return User.findById(req.params.userId)
     .then(user => {
       Emotion.find({
-        user: req.params.userId
+        user: user
       })
         .populate("user")
         .then(emotions => {
