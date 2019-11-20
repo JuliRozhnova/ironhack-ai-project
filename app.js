@@ -13,8 +13,9 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
 
-mongoose
-  .connect("mongodb://localhost/ironhack-ai-proj", { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/ironhack-ai-proj", {
+    useNewUrlParser: true
+  })
   .then(x => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
