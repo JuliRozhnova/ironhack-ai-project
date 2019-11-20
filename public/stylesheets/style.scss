@@ -78,8 +78,12 @@ canvas {
 .test {
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
+p {
+  text-align: center;
+}
 .imgSelf {
   border-radius: 50px;
   box-shadow: 2px 5px #282828;
@@ -91,20 +95,23 @@ img {
 }
 
 .nav {
-  & > a {
-    flex-direction: row;
-    padding: 0.5rem 1rem;
-    background: #ff0000;
-    color: white;
-    text-decoration: none;
-    box-shadow: 2px 5px #282828;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    // align-content: center;
-    width: 10%;
-  }
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 10rem;
+  background-color: transparent;
+  box-shadow: none;
 }
-h1{
+.nav a {
+  padding: 0.5rem 1rem;
+  background-color: #ff0000;
+  color: white;
+  text-decoration: none;
+  box-shadow: 2px 5px #282828;
+  border-radius: 50px;
+  width: 10%;
+  text-align: center;
+}
+h1 {
   text-align: center;
 }
