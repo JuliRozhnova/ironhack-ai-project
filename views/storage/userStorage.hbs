@@ -1,0 +1,32 @@
+{{#if emotions}}
+<h1>Emotions {{#if user}}from {{user.username}}{{/if}}</h1>
+{{#each emotions}}
+<div>
+  <img src="{{photo}}" alt="{{emotion}}" />
+  <p>{{emotion}}</p>
+  <a href="/storage/{{user._id}}/{{_id}}">Details</a>
+  {{#if ../ownerRights}}
+  {{#if favourite}}
+  <a href="/storage/{{user._id}}/{{_id}}/notfav">Remove from favourite</a>
+  {{else}}
+  <a href="/storage/{{user._id}}/{{_id}}/fav">Make favourite</a>
+  {{/if}}
+  <a href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
+  {{/if}}
+</div>
+{{/each}}
+{{else}}
+<p>No emotions to display!</p>
+{{/if}}
+
+<a href="/storage">Go back to storage</a>
+
+<script>
+  const storage = document
+    .querySelector("a[href='/storage/{{owner}}']")
+  if (document.location.pathname === "/storage/{{owner}}") {
+    storage.setAttribute(
+      "aria-hidden", true
+    );
+  }
+</script>

@@ -14,7 +14,7 @@ a {
   justify-content: space-around; }
 
 .controller > div {
-  width: 33%;
+  width: 70%;
   text-align: center;
   line-height: 24px; }
 
@@ -27,9 +27,7 @@ video,
 canvas {
   border: 2px solid white;
   background: #282828;
-  height: 198px;
-  width: 100%;
-  padding: 300px; }
+  width: 100%; }
 
 [aria-hidden="true"] {
   display: none; }
