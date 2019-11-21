@@ -1,5 +1,9 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-{{#if owner}}
-<a href="/photo">Take photo</a>
-{{/if}}
+<div class="row">
+  <div class="center col s12">
+    <h1>{{title}}</h1>
+    <p>Welcome to {{title}}!</p>
+    {{#if owner}}
+    <a class="waves-effect waves-light btn-large" href="/photo">Take photo</a>
+    {{/if}}
+  </div>
+</div>

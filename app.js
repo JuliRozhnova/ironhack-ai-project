@@ -13,7 +13,8 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/ironhack-ai-proj", {
+mongoose
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/ironhack-ai-proj", {
     useNewUrlParser: true
   })
   .then(x => {
@@ -64,7 +65,7 @@ hbs.registerHelper("ifUndefined", (value, options) => {
 });
 
 // default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
+app.locals.title = "EmoTube";
 
 // Enable authentication using session + passport
 app.use(

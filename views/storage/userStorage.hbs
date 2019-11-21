@@ -1,31 +1,32 @@
 {{#if emotions}}
 <h1>Emotions {{#if user}}from {{user.username}}{{/if}}</h1>
-{{#if ../ownerRights}}
+{{#if ownerRights}}
 <form>
-  <label for="filterEmotions">Choose:</label>
-  <select name="filterEmotions" id="filterEmotions">
-    <option value="all">Show all</option>
-    <option value="fav">Show favourite</option>
-  </select>
+  <div class="input-field">
+    <select name="filterEmotions" id="filterEmotions">
+      <option value="" disabled selected>Choose your option</option>
+      <option value="all">Show all</option>
+      <option value="fav">Show favourite</option>
+    </select>
+    <label for="filterEmotions">Choose:</label>
+  </div>
 </form>
 {{/if}}
-<div class="carousel" id="container-item">
+<div id="container-item">
   {{#each emotions}}
-  <div class="carousel-item">
-    {{#if ../ownerRights}}
-    <img src="{{photo}}" alt="{{emotion}}">
-    {{/if}}
-    <p>{{emotion}}</p>
-    <a href="/storage/{{user._id}}/{{_id}}">Details</a>
-    {{#if ../ownerRights}}
-    {{#if favourite}}
-    <a href="/storage/{{user._id}}/{{_id}}/notfav">Remove from favourite</a>
-    {{else}}
-    <a href="/storage/{{user._id}}/{{_id}}/fav">Make favourite</a>
-    {{/if}}
-    <a href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
-    {{/if}}
-  </div>
+  {{#if ../ownerRights}}
+  <img src="{{photo}}" alt="{{emotion}}">
+  {{/if}}
+  <p>{{emotion}}</p>
+  <a href="/storage/{{user._id}}/{{_id}}">Details</a>
+  {{#if ../ownerRights}}
+  {{#if favourite}}
+  <a href="/storage/{{user._id}}/{{_id}}/notfav">Remove from favourite</a>
+  {{else}}
+  <a href="/storage/{{user._id}}/{{_id}}/fav">Make favourite</a>
+  {{/if}}
+  <a href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
+  {{/if}}
   {{/each}}
 </div>
 {{else}}
@@ -37,8 +38,8 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.carousel');
-    var instances = M.Carousel.init(elems, { duration: 300 });
+    var select = document.querySelectorAll('select');
+    var instancesSelect = M.FormSelect.init(select);
   });
 
   const storage = document
