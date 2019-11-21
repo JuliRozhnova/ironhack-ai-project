@@ -25,11 +25,13 @@
     {{/if}}
   </nav>
   <ul id="slide-out" class="sidenav sidenav-fixed">
+    {{#if owner}}
     <li>
       <div class="sidenav-top valign-wrapper">
         <i class="material-icons left">account_box</i><span>{{owner.username}}</span>
       </div>
     </li>
+    {{/if}}
     <li><a class="waves-effect waves-light" href="/">Home</a></li>
     <li class="sidenav-breake"><a class="waves-effect" href="/about">About EmoTube</a></li>
     {{#if owner}}
