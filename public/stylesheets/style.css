@@ -41,4 +41,7 @@ button[aria-hidden="false"] {
     width: 370px;
     height: 218px; }
 
+.carousel-item {
+  min-width: 280px; }
+
 /*# sourceMappingURL=style.css.map */
