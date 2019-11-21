@@ -9,10 +9,11 @@
   </div>
   {{#if ownerRights}}
   <div class="col s4">
-    <a class="btn waves-effect waves-light right" href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
+    <a class="btn waves-effect waves-light right" href="/storage/{{user._id}}/{{emotion._id}}/delete">Delete</a>
   </div>
   {{/if}}
 </div>
+{{#if emotion.playlists}}
 <div class="row flex">
   {{#each emotion.playlists}}
   <div class="col s12 m6">
@@ -34,3 +35,12 @@
   </div>
   {{/each}}
 </div>
+{{else}}
+<div class="row">
+  <div class="col s12 center">
+    <p>You didn't generate a playlist</p>
+    <a class="waves-effect waves-light btn-large btn btn-red"
+      href="/photo/playlist/{{user._id}}/{{emotion._id}}">Generate playlist</a>
+  </div>
+</div>
+{{/if}}
