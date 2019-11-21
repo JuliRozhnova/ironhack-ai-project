@@ -1,19 +1,19 @@
 <div class="row">
   <div class="col s12">
-    <a href="/storage/{{user._id}}">Go back</a>
+    <a class="link" href="/storage/{{user._id}}">Go back</a>
   </div>
 </div>
 <div class="row valign-wrapper">
-  <div class="col s10">
-    <p>Emotion {{emotion.emotion}} from {{user.username}}</p>
+  <div class="col {{#if ownerRights}}s8{{else}}s12{{/if}}">
+    <p>Emotion {{emotion.emotion}} from <span class="flow-text">{{user.username}}</span></p>
   </div>
   {{#if ownerRights}}
-  <div class="col s2">
+  <div class="col s4">
     <a class="btn waves-effect waves-light right" href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
   </div>
   {{/if}}
 </div>
-<div class="row">
+<div class="row flex">
   {{#each emotion.playlists}}
   <div class="col s12 m6">
     <div class="card">
@@ -25,9 +25,9 @@
             title="Watch on youtube">video_library</i></a>
       </div>
       <div class="card-content">
-        <h3>{{title}}</h3>
+        <p class="card-title">{{title}}</p>
         {{#if description}}
-        <p>{{description}}</p>
+        <p class="card-desc">{{description}}</p>
         {{/if}}
       </div>
     </div>

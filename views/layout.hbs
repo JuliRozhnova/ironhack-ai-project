@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{title}}</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="/stylesheets/lib/materialize.min.css" media="screen,projection" />
   <link rel="stylesheet" href="/stylesheets/style.css" />
@@ -16,8 +17,7 @@
 </head>
 
 <body>
-
-  <nav class="hide-on-large-only nav">
+  <nav class="hide-on-large-only nav valign-wrapper">
     <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <a class="waves-effect" href="/">Home </a>
     {{#if owner}}
@@ -26,16 +26,16 @@
   </nav>
   <ul id="slide-out" class="sidenav sidenav-fixed">
     <li>
-      <div class="user-view text-dark">
-        <p>Hello!</p>
-        <span class="name">{{owner.username}}</span>
+      <div class="sidenav-top valign-wrapper">
+        <i class="material-icons left">account_box</i><span>{{owner.username}}</span>
       </div>
     </li>
-    <li><a class="waves-effect" href="/about">About EmoTube</a></li>
+    <li><a class="waves-effect waves-light" href="/">Home</a></li>
+    <li class="sidenav-breake"><a class="waves-effect" href="/about">About EmoTube</a></li>
     {{#if owner}}
-    <li><a class="waves-effect" href="/storage">Storage</a></li>
     <li><a class="waves-effect" href="/photo">Take photo</a></li>
-    <li><a class="waves-effect" href="/storage/{{owner._id}}">My storage</a></li>
+    <li><a class="waves-effect" href="/storage">Storage</a></li>
+    <li class="sidenav-breake"><a class="waves-effect" href="/storage/{{owner._id}}">My storage</a></li>
     <li><a class="waves-effect" href="/auth/logout">Logout</a></li>
     {{else}}  
     <li><a class="waves-effect" href="/auth/login">Login</a></li>

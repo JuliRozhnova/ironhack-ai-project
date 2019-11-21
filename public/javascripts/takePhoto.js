@@ -123,7 +123,7 @@ function generateEmotions(input) {
               var link = document.createTextNode("Go to playlist");
               a.appendChild(link);
               a.title = "Go to playlist";
-              a.className += "waves-effect waves-light btn-large";
+              a.className += "waves-effect waves-light btn-large btn btn-red";
               a.href = `/photo/playlist/${response.data.user}/${response.data._id}`;
               document.querySelector(".controller-success").appendChild(a);
             })

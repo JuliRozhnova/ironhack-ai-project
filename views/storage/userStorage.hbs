@@ -1,16 +1,14 @@
 <div class="row">
   <div class="col s12">
-    <a href="/storage">Go back to storage</a>
+    <a class="link" href="/storage">Go back to storage</a>
   </div>
 </div>
-
-{{#if emotions}}
 <div class="row">
-  <div class="col s12">
-    <p>Emotions {{#if user}}from {{user.username}}{{/if}}</p>
+  <div class="col {{#if ownerRights}}s12 m6{{else}}s12{{/if}}">
+    <p>Emotions {{#if user}}from <span class="flow-text">{{user.username}}</span>{{/if}}</p>
   </div>
-  <div class="col s6">
-    {{#if ownerRights}}
+  {{#if ownerRights}}
+  <div class="col s12 m6">
     <form>
       <div class="input-field">
         <select name="filterEmotions" id="filterEmotions">
@@ -20,18 +18,19 @@
         <label for="filterEmotions">Filter by favourites:</label>
       </div>
     </form>
-    {{/if}}
   </div>
+  {{/if}}
 </div>
+{{#if emotions}}
 <div class="row" id="container-item">
   {{#each emotions}}
-  <div class="col s12 m4">
+  <div class="col s12 m6">
     <div class="card">
       <div class="card-image">
         {{#if ../ownerRights}}
         <img src="{{photo}}" alt="{{emotion}}">
         {{#if favourite}}
-        <a class="btn-floating halfway-fab waves-effect waves-light blue" href="/storage/{{user._id}}/{{_id}}/notfav">
+        <a class="btn-floating halfway-fab waves-effect waves-light teal" href="/storage/{{user._id}}/{{_id}}/notfav">
           <i class="material-icons" title="Remove from favourite">favorite</i>
         </a>
         {{else}}
@@ -42,11 +41,13 @@
         {{/if}}
       </div>
       <div class="card-content">
-        <p>Emotion: {{emotion}}</p>
-        <a class="btn waves-effect waves-light" href="/storage/{{user._id}}/{{_id}}">Go for Details</a>
-        {{#if ../ownerRights}}
-        <a class="btn waves-effect waves-light" href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
-        {{/if}}
+        <p class="card-title">Emotion: {{emotion}}</p>
+        <div>
+          <a class="btn waves-effect waves-light" href="/storage/{{user._id}}/{{_id}}">Go for Details</a>
+          {{#if ../ownerRights}}
+          <a class="btn waves-effect waves-light btn-white" href="/storage/{{user._id}}/{{_id}}/delete">Delete</a>
+          {{/if}}
+        </div>
       </div>
     </div>
   </div>
@@ -55,7 +56,7 @@
 {{else}}
 <div class="row">
   <div class="col s12">
-    <p>No emotions to display</p>
+    <p class="center">No emotions to display : (</p>
   </div>
 </div>
 {{/if}}
@@ -67,8 +68,8 @@
   });
 
   const storage = document
-    .querySelector("a[href='/storage/{{owner}}']")
-  if (document.location.pathname === "/storage/{{owner}}") {
+    .querySelector("a[href='/storage/{{owner._id}}']")
+  if (document.location.pathname === "/storage/{{owner._id}}") {
     storage.setAttribute(
       "aria-hidden", true
     );
@@ -87,7 +88,7 @@
         res.data.forEach(item => {
           let favButton = ""
           if (JSON.parse(res.config.data).value.toString() === "fav" || item.favourite) {
-            favButton = `<a class="btn-floating halfway-fab waves-effect waves-light blue" href="/storage/${item.user._id}/${item._id}/notfav">
+            favButton = `<a class="btn-floating halfway-fab waves-effect waves-light teal" href="/storage/${item.user._id}/${item._id}/notfav">
           <i class="material-icons" title="Remove from favourite">favorite</i>
         </a>`
           }
@@ -97,23 +98,25 @@
         </a>`
           }
 
-          itemBox += ` <div class="col s12 m4">
+          itemBox += ` <div class="col s12 m6">
     <div class="card">
       <div class="card-image">
         <img src="${item.photo}" alt="${item.emotion}" />
         ${favButton}
       </div>
       <div class="card-content">
-        <p>Emotion: ${item.emotion}</p>
+        <p class="card-title">Emotion: ${item.emotion}</p>
+        <div>
         <a class="btn waves-effect waves-light" href="/storage/${item.user._id}/${item._id}">Go for Details</a>
-        <a class="btn waves-effect waves-light" href="/storage/${item.user._id}/${item._id}/delete">Delete</a>
+        <a class="btn waves-effect waves-light btn-white" href="/storage/${item.user._id}/${item._id}/delete">Delete</a>
+        </div>
       </div>
     </div>
   </div>`
         })
       } else {
         itemBox += `<div class="col s12">
-    <p>No emotions to display</p>
+    <p class="center">No emotions to display : (</p>
   </div>`
       }
 

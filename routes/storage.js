@@ -10,7 +10,7 @@ const loginCheck = _ => (req, res, next) =>
 router.get("/", (req, res) => {
   User.find({})
     .then(users => {
-      res.render("storage/storage", { users: users, owner: req.user._id });
+      res.render("storage/storage", { users: users, owner: req.user });
     })
     .catch(err => console.log(err));
 });
@@ -41,7 +41,7 @@ router.get("/:userId", (req, res, next) => {
             ownerRights:
               user._id.toString() == req.user._id.toString() ||
               req.user.role === "admin",
-            owner: req.user._id
+            owner: req.user
           });
         });
     })
@@ -60,7 +60,7 @@ router.get("/:userId/:emotionId", (req, res, next) => {
           ownerRights:
             user._id.toString() == req.user._id.toString() ||
             req.user.role === "admin",
-          owner: req.user._id
+          owner: req.user
         });
       });
     })
