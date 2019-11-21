@@ -1,118 +1,51 @@
 body {
   color: white;
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url("/images/68284170-silver-metal-texture-background.jpg");
   background-size: cover;
 }
 
-a {
-  color: #00b7ff;
-}
+body {
+  padding-left: 300px;
 
-.controller {
-  display: flex;
-  align-items: center;
-  flex-flow: column;
-  justify-content: space-around;
-}
-
-.controller > div {
-  width: 70%;
-  text-align: center;
-  line-height: 24px;
-}
-
-@media (max-width: 814px) {
-  .controller > div {
-    width: 100%;
-    margin-bottom: 24px;
+  @media only screen and (max-width: 992px) {
+    padding-left: 0;
   }
+}
+
+video {
+  background: #282828;
 }
 
 video,
 canvas {
-  border: 2px solid rgba(255, 255, 255, 1);
-  background: #282828;
   width: 100%;
+  min-height: 201px;
+
+  @media only screen and (min-width: 600px) {
+    min-height: 440px;
+  }
+
+  @media only screen and (min-width: 993px) {
+    width: 600px;
+    //min-height: 565px;
+  }
 }
 
 [aria-hidden="true"] {
-  display: none;
+  display: none !important;
 }
 
 [aria-hidden="false"] {
-  display: block;
+  display: block !important;
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap-reverse;
-  justify-content: center;
-
-  & > div {
-    width: 50%;
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
-  }
-
-  &-iframe {
-    iframe {
-      // box-shadow: 7px 7px white;
-      border-radius: 50px;
-      box-shadow: 2px 5px #282828;
-      justify-content: space-between;
-      align-content: space-between;
-    }
-  }
-
-  div a {
-    padding: 1rem 2rem;
-    background: #ff0000;
-    color: white;
-    text-decoration: none;
-    box-shadow: 2px 5px #282828;
-    border-radius: 50px;
-  }
+button[aria-hidden="false"] {
+  display: inline-block !important;
 }
 
 .test {
   display: flex;
   justify-content: center;
-  text-align: center;
-}
-
-p {
-  text-align: center;
-}
-.imgSelf {
-  border-radius: 50px;
-  box-shadow: 2px 5px #282828;
-}
-
-img {
-  border-radius: 50px;
-  box-shadow: 2px 5px #282828;
-}
-
-.nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0 10rem;
-  background-color: transparent;
-  box-shadow: none;
-}
-.nav a {
-  padding: 0.5rem 1rem;
-  background-color: #ff0000;
-  color: white;
-  text-decoration: none;
-  box-shadow: 2px 5px #282828;
-  border-radius: 50px;
-  width: 10%;
-  text-align: center;
-}
-h1 {
   text-align: center;
 }

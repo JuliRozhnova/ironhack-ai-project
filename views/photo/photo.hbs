@@ -1,14 +1,31 @@
-<div class="controller">
-  <div class="controller-web" aria-hidden="false">
-    <video id="video" autoplay></video>
-    <button id='getUserMediaButton'>Start stream</button>
-    <button id='takePhotoButton' disabled>Take Photo</button>
+<div class="row">
+  <div class="col s12">
+    <div class="controller-web" aria-hidden="false">
+      <video class="center-block responsive-video" id="video" autoplay></video>
+
+      <div class="center">
+        <button class="btn waves-effect waves-light" id='getUserMediaButton'>Start stream
+          <i class="material-icons left">cached</i>
+        </button>
+        <button class="btn waves-effect waves-light" id='takePhotoButton' disabled>Take Photo
+          <i class="material-icons left">camera_enhance</i>
+        </button>
+      </div>
+    </div>
   </div>
-  <div>
-    <canvas id='takePhotoCanvas' aria-hidden="true"></canvas>
+</div>
+<div class="row">
+  <div class="center col s12">
     <p id="emotion"></p>
-    <button id="retakePhotoButton" aria-hidden="true">Retake</button>
-    <button id="generateButton" aria-hidden="true">Generate</button>
+    <canvas id='takePhotoCanvas' aria-hidden="true" class="center-block"></canvas>
+    <div class="controller-success">
+      <button class="btn waves-effect waves-light" id="retakePhotoButton" aria-hidden="true">Retake
+        <i class="material-icons left">autorenew</i>
+      </button>
+      <button class="btn waves-effect waves-light" id="generateButton" aria-hidden="true">Generate
+        <i class="material-icons left">check</i>
+      </button>
+    </div>
   </div>
 </div>
 

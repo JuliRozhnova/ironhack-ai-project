@@ -5,8 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{title}}</title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/lib/materialize.min.css" media="screen,projection" />
   <script src="/javascripts/lib/face-api.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://apis.google.com/js/api.js"></script>
@@ -14,22 +17,36 @@
 
 <body>
 
-  <nav class="nav">
-    <a href="/">Home </a>
+  <nav class="hide-on-large-only nav">
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <a class="waves-effect" href="/">Home </a>
     {{#if owner}}
-    <a href="/storage">Storage</a>
-    <a href="/photo">Take photo</a>
-    <a href="/storage/{{owner._id}}">My storage</a>
-    <a href="/auth/logout">Logout</a>
-    {{else}}  
-    <a href="/auth/login">Login</a>
-    <a href="/auth/signup">Signup</a>
+    <a class="waves-effect" href="/photo">Take photo</a>
     {{/if}}
   </nav>
+  <ul id="slide-out" class="sidenav sidenav-fixed">
+    <li>
+      <div class="user-view text-dark">
+        <p>Hello!</p>
+        <span class="name">{{owner.username}}</span>
+      </div>
+    </li>
+    {{#if owner}}
+    <li><a class="waves-effect" href="/storage">Storage</a></li>
+    <li><a class="waves-effect" href="/photo">Take photo</a></li>
+    <li><a class="waves-effect" href="/storage/{{owner._id}}">My storage</a></li>
+    <li><a class="waves-effect" href="/auth/logout">Logout</a></li>
+    {{else}}  
+    <li><a class="waves-effect" href="/auth/login">Login</a></li>
+    <li><a class="waves-effect" href="/auth/signup">Signup</a></li>
+    {{/if}}
+  </ul>
 
-  {{{body}}}
+  <div class="container">
+    {{{body}}}
+  </div>
   <script src="/javascripts/script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script type="text/javascript" src="/javascripts/lib/materialize.min.js"></script>
 </body>
 
 </html>
