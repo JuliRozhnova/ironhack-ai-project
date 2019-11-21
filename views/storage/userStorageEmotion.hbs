@@ -37,10 +37,16 @@
 </div>
 {{else}}
 <div class="row">
+  {{#if ownerRights}}
   <div class="col s12 center">
     <p>You didn't generate a playlist</p>
     <a class="waves-effect waves-light btn-large btn btn-red"
       href="/photo/playlist/{{user._id}}/{{emotion._id}}">Generate playlist</a>
   </div>
+  {{else}}
+  <div class="col s12 center">
+    <p>{{user.username}} didn't generate a playlist : (</p>
+  </div>
+  {{/if}}
 </div>
 {{/if}}
