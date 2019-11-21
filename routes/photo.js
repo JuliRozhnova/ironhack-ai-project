@@ -19,7 +19,7 @@ router.get("/", loginCheck(), (req, res, next) => {
   res.render("photo/photo", {
     user: req.user,
     path: req.route.path,
-    owner: req.user._id
+    owner: req.user
   });
 });
 
@@ -69,7 +69,7 @@ router.get("/playlist/:userId/:emotionId", loginCheck(), (req, res, next) => {
               res.render("photo/playlistDetails", {
                 emotion: emotion,
                 user: user,
-                owner: req.user._id
+                owner: req.user
               });
             });
           });

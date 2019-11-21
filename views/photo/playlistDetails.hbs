@@ -1,22 +1,29 @@
-<div class="test">
-  <img class="imgSelf" src="{{emotion.photo}}" alt="{{user.username}}">
+<div class="row">
+  <div class="center col s12">
+    <p>Your current mood: {{emotion.emotion}}</p>
+    <p class="flow-text">Your playlists:</p>
+  </div>
 </div>
-<p>Your current mood: {{emotion.emotion}}</p>
-<p>Your playlists:</p>
-
-<div class="container">
+<div class="row flex">
   {{#each emotion.playlists}}
-  <div>
-    <div class="container-iframe">
-      <iframe width="360" height="215" src="https://www.youtube.com/embed/videoseries?list={{itemId}}" frameborder="0"
-        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <div class="col s12 m6">
+    <div class="card">
+      <div class="card-image">
+        <div class="container-iframe">
+          <iframe width="360" height="215" src="https://www.youtube.com/embed/videoseries?list={{itemId}}"
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <a class="btn-floating halfway-fab waves-effect waves-light red"
+          href="https://www.youtube.com/channel/{{channelId}}" alt='{{title}}' target="_blank"><i class="material-icons"
+            title="Watch on youtube">video_library</i></a>
+      </div>
+      <div class="card-content">
+        <p class="card-title">{{title}}</p>
+        {{#if description}}
+        <p class="card-desc">{{description}}</p>
+        {{/if}}
+      </div>
     </div>
-    <h3>{{title}}</h3>
-    {{#if description}}
-    <p>{{description}}</p>
-    {{/if}}
-    <a href="https://www.youtube.com/channel/{{channelId}}" alt='{{title}}' target="_blank">GO TO
-      CHANNEL</a>
   </div>
   {{/each}}
 </div>

@@ -1,4 +1,29 @@
-{{#each users}}
-<p>{{username}}</p>
-<a href="/storage/{{_id}}">Emotion History: {{username}}</a>
-{{/each}}
+<div class="row">
+  <div class="col s12">
+    <p class="flex-text center">Explore history of users</p>
+  </div>
+  <div class="col s12">
+    <div class="carousel">
+      {{#each users}}
+      <div class="carousel-item">
+
+        <div class="card darken-1">
+          <div class="card-content">
+            <p class="valign-wrapper"><i class="material-icons left">account_box</i>{{username}}</p>
+          </div>
+          <div class="card-action center">
+            <a class="btn waves-effect waves-light" href="/storage/{{_id}}">Emotion History</a>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var carousel = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(carousel, { duration: 200 });
+  });
+</script>

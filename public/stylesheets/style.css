@@ -1,8 +1,9 @@
 body {
-  color: white;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url("/images/68284170-silver-metal-texture-background.jpg");
-  background-size: cover; }
+  color: #282828;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  line-height: 30px;
+  background-color: #fff; }
 
 body {
   padding-left: 300px; }
@@ -11,17 +12,15 @@ body {
       padding-left: 0; } }
 
 video {
-  background: #282828; }
+  background: #3d3d3d; }
 
 video,
 canvas {
   width: 100%;
-  min-height: 201px; }
+  width: 300px;
+  height: auto !important;
+  margin-bottom: 30px; }
   @media only screen and (min-width: 600px) {
-    video,
-    canvas {
-      min-height: 440px; } }
-  @media only screen and (min-width: 993px) {
     video,
     canvas {
       width: 600px; } }
@@ -35,9 +34,123 @@ canvas {
 button[aria-hidden="false"] {
   display: inline-block !important; }
 
-.test {
+.btn {
+  background-color: #282828; }
+  .btn-red {
+    background-color: #ff0000; }
+  .btn-white {
+    background-color: #fff;
+    color: #282828; }
+  .btn:hover {
+    background-color: #3d3d3d;
+    color: #fff; }
+
+.link {
+  position: relative;
+  display: inline-block;
+  color: #282828;
+  margin-bottom: 5px; }
+  .link:before {
+    bottom: -5px;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 10; }
+  .link:after {
+    background: red;
+    bottom: -5px;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: right;
+    transform-origin: right;
+    -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: -webkit-transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    width: 100%;
+    z-index: 20; }
+  .link:focus:after, .link:hover:after {
+    background: red;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transform-origin: left;
+    transform-origin: left; }
+
+nav {
+  background-color: #fff;
+  color: #292929; }
+  nav a {
+    color: #292929;
+    padding: 0 15px; }
+
+.sidenav-breake {
+  margin-bottom: 30px; }
+
+.sidenav-top {
+  background-color: #f5f5f5;
+  color: #292929;
+  padding: 30px 32px 5px;
+  margin-bottom: 30px; }
+
+.logo {
+  display: inline-block;
+  width: 300px;
+  height: 217px;
+  background: url("../images/emotube-logo.png") center/cover no-repeat;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s; }
+  @media only screen and (min-width: 600px) {
+    .logo {
+      width: 500px;
+      height: 363px; } }
+  .logo:hover {
+    background-image: url("../images/emotube-wooho.png");
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s; }
+
+.container {
+  padding-top: 30px; }
+
+.flex {
   display: flex;
-  justify-content: center;
-  text-align: center; }
+  flex-wrap: wrap; }
+  .flex > div {
+    align-self: stretch;
+    margin-bottom: 30px; }
+  .flex .card {
+    height: 100%; }
+
+.card {
+  background-color: #f5f5f5; }
+  .card-desc {
+    color: #3d3d3d;
+    font-size: 16px;
+    word-break: break-word; }
+  .card iframe {
+    width: 370px;
+    height: 218px; }
+  .card:focus, .card:hover {
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    outline: 0; }
+
+.carousel-item {
+  min-width: 280px; }
+
+.dropdown-content li > a,
+.dropdown-content li > span {
+  color: #282828; }
 
 /*# sourceMappingURL=style.css.map */
