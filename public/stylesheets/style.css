@@ -1,64 +1,54 @@
 body {
   color: white;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  /*background-image: url("/images/DARKDARK.jpg");*/
   background-color: #282828;
-  background-size: cover;
-}
+  background-size: cover; }
 
 body {
-  padding-left: 300px;
-}
-@media only screen and (max-width: 992px) {
-  body {
-    padding-left: 0;
-  }
-}
+  padding-left: 300px; }
+  @media only screen and (max-width: 992px) {
+    body {
+      padding-left: 0; } }
 
 video {
-  background: #282828;
-}
+  background: #282828; }
 
 video,
 canvas {
   width: 100%;
-  min-height: 201px;
-}
-@media only screen and (min-width: 600px) {
-  video,
-  canvas {
-    min-height: 440px;
-  }
-}
-@media only screen and (min-width: 993px) {
-  video,
-  canvas {
-    width: 600px;
-  }
-}
+  min-height: 201px; }
+  @media only screen and (min-width: 600px) {
+    video,
+    canvas {
+      min-height: 440px; } }
+  @media only screen and (min-width: 993px) {
+    video,
+    canvas {
+      width: 600px; } }
 
 [aria-hidden="true"] {
-  display: none !important;
-}
+  display: none !important; }
 
 [aria-hidden="false"] {
-  display: block !important;
-}
+  display: block !important; }
 
 button[aria-hidden="false"] {
-  display: inline-block !important;
-}
+  display: inline-block !important; }
 
 .card {
-  background-color: #3d3d3d;
-}
-.card iframe {
-  width: 370px;
-  height: 218px;
-}
+  background-color: #3d3d3d; }
+  .card iframe {
+    width: 370px;
+    height: 218px; }
 
 .carousel-item {
-  min-width: 280px;
-}
+  min-width: 280px; }
+
+.AboutETlinks a {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  color: antiquewhite;
+  text-decoration: none; }
 
 /*# sourceMappingURL=style.css.map */
