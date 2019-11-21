@@ -1,7 +1,7 @@
 body {
   color: white;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url("/images/68284170-silver-metal-texture-background.jpg");
+  background-color: #282828;
   background-size: cover; }
 
 body {
@@ -35,9 +35,10 @@ canvas {
 button[aria-hidden="false"] {
   display: inline-block !important; }
 
-.test {
-  display: flex;
-  justify-content: center;
-  text-align: center; }
+.card {
+  background-color: #3d3d3d; }
+  .card iframe {
+    width: 370px;
+    height: 218px; }
 
 /*# sourceMappingURL=style.css.map */
