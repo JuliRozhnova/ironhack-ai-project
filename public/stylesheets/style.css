@@ -44,11 +44,4 @@ button[aria-hidden="false"] {
 .carousel-item {
   min-width: 280px; }
 
-.AboutETlinks a {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  color: antiquewhite;
-  text-decoration: none; }
-
 /*# sourceMappingURL=style.css.map */

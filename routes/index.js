@@ -5,6 +5,6 @@ router.get("/", (req, res, next) => {
   res.render("index", { owner: req.user });
 });
 router.get("/about", (req, res, next) => {
-  res.render("about");
+  res.render("about", { owner: req.user });
 });
 module.exports = router;
