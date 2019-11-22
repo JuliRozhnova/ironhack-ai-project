@@ -47,7 +47,7 @@ router.get("/playlist/:userId/:emotionId", loginCheck(), (req, res, next) => {
         youtube.search
           .list({
             part: "snippet",
-            maxResults: 10,
+            maxResults: 50,
             order: "relevance",
             q: `${emotion.emotion} music`,
             relevanceLanguage: "en",
